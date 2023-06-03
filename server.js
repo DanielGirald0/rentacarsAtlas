@@ -1,12 +1,10 @@
 require('dotenv').config();
-var cors = require('cors')
-const express = require('express')
-const mongoose = require('mongoose')
-const userRoutes = require('./routes/user')
-const rentRoutes = require('./routes/rent')
-const carRoutes = require('./routes/car')
+var cors        = require('cors')
+const express   = require('express')
+const mongoose  = require('mongoose')
+const apiRoutes = require('./routes')
 
-const app = express()
+const app  = express()
 const port = process.env.PORT || 3200
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -15,10 +13,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
-
-app.get('/', (req, res)=>{
-    res.send("hola")
-})
+app.use('/api', apiRoutes)
 
 app.listen(port, () => {
     console.log(`Servidor iniciado en http://localhost:${port}`);

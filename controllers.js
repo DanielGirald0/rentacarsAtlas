@@ -1,4 +1,4 @@
-const { Usuario } = require("./models")
+const { Usuario } = require("./models/user")
 
 //Usuario
 exports.readUsers = (req, res) =>
@@ -12,12 +12,12 @@ exports.readUser = (req, res) =>
         if (err) res.json({ error: err });
         else res.json(data);
     });
+    
 exports.deleteUser = (req, res) =>
     User.findOneAndRemove({ _id: req.params.id }, (err, data) => {
         if (err) res.json({ error: err });
         else res.json(data);
     });
-
 
 exports.updateUser = (req, res) =>
     User.findOneAndUpdate(
